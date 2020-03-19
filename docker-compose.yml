@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  fancious_bot:
+    container_name: fancious_bot
+    build:
+      context: .
+    volumes:
+      - ./src:/usr/app/src
+    ports:
+      - 3000:3000

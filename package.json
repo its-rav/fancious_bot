@@ -1,0 +1,25 @@
+{
+  "name": "fancious_bot",
+  "version": "1.0.0",
+  "description": "a discord bot",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon -L src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/voasd/fancious_bot.git"
+  },
+  "author": "Nhan Vo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/voasd/fancious_bot/issues"
+  },
+  "homepage": "https://github.com/voasd/fancious_bot#readme",
+  "dependencies": {
+    "discord.js": "^12.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
