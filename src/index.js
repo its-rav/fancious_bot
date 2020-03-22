@@ -12,13 +12,13 @@ const { crawlData } = require('./crawlData')
 
 const client = new Client();
 const statuses = [{
-    type: 'PLAYING',
+    type: 0,//'PLAYING',
     activity: 'with your feelings'
 }, {
-    type: 'LISTENING',
+    type: 2,//'LISTENING',
     activity: 'the sound of nature'
 }, {
-    type: 'WATCHING',
+    type: 3,//'WATCHING',
     activity: 'myself highing af'
 }];
 
@@ -38,9 +38,9 @@ client.on('ready', () => {
                 url: "https://www.facebook.com/vonhan3105"
             }
         });
-        
+
         console.log(type, activity);
-    }, 10000);
+    }, 30000);
 
     console.log('Ready!')
 });
