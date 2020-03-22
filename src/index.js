@@ -13,8 +13,8 @@ const { crawlData } = require('./crawlData')
 const client = new Client();
 
 client.on('ready', () => {
-	bot.setStatus('Highing af');
-	bot.setActivity('the sound of nature',{type:'LISTENING'}).catch(console.error);
+	client.setStatus('Highing af');
+	client.setActivity('the sound of nature',{type:'LISTENING'}).catch(console.error);
 	
 	console.log('Ready!')
 });
