@@ -4,7 +4,9 @@
   "description": "a discord bot",
   "main": "src/index.js",
   "scripts": {
-    "dev": "nodemon -L src/index.js"
+    "dev": "nodemon -L src/index.js",
+    "start":"node src/index.js",
+    "build":"npm install"
   },
   "repository": {
     "type": "git",
