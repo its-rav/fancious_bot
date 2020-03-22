@@ -24,11 +24,21 @@ const statuses = [{
 
 client.on('ready', () => {
     setInterval(() => {
+
         const random = Math.floor(Math.random() * statuses.length);
 
         let { type, activity } = statuses[random]
 
-        client.user.setActivity(activity, { type }).catch(console.error);
+        client.user.setStatus('online')
+
+        client.user.setPresence({
+            game: {
+                name: activity,
+                type,
+                url: "https://www.facebook.com/vonhan3105"
+            }
+        });
+        
         console.log(type, activity);
     }, 10000);
 
