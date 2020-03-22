@@ -5,8 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "dev": "nodemon -L src/index.js",
-    "start":"node src/index.js",
-    "build":"npm install"
+    "start": "node src/index.js",
+    "build": "npm install"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,8 @@
   "dependencies": {
     "axios": "^0.19.2",
     "cheerio": "^1.0.0-rc.3",
-    "discord.js": "^12.0.2"
+    "discord.js": "^12.0.2",
+    "dotenv": "^8.2.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"

@@ -1,5 +1,8 @@
+require('dotenv').config();
 const { Client, MessageEmbed } = require('discord.js');
 const { token, prefix, appName } = require('./config/settings');
+
+const TOKEN = process.env.TOKEN;
 
 const customEmbeb = require('./embeb');
 
@@ -102,4 +105,4 @@ client.on('message', async (msg) => {
 });
 
 
-client.login(token);
+client.login(TOKEN);
