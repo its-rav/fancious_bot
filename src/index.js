@@ -12,13 +12,13 @@ const { crawlData } = require('./crawlData')
 
 const client = new Client();
 const statuses = [{
-    type: 0,//'PLAYING',
+    type: 'PLAYING',
     activity: 'with your feelings'
 }, {
-    type: 2,//'LISTENING',
+    type: 'LISTENING',
     activity: 'the sound of nature'
 }, {
-    type: 3,//'WATCHING',
+    type: 'WATCHING',
     activity: 'myself highing af'
 }];
 
@@ -29,18 +29,16 @@ client.on('ready', () => {
 
         let { type, activity } = statuses[random]
 
-        client.user.setStatus('online')
-
         client.user.setPresence({
             game: {
                 name: activity,
-                type,
-                url: "https://www.facebook.com/vonhan3105"
-            }
+                type
+            },
+            status: 'online'
         });
 
         console.log(type, activity);
-    }, 30000);
+    }, 300000);
 
     console.log('Ready!')
 });
