@@ -29,8 +29,8 @@ client.on('ready', () => {
         let { type, activity } = statuses[random]
 
         client.user.setActivity(activity, { type }).catch(console.error);
+        console.log(type, activity);
     }, 10000);
-
 
     console.log('Ready!')
 });
