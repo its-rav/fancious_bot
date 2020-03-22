@@ -11,12 +11,28 @@ const { getNcovidStatisticsByCountry, getCountries } = require('./ncovid')
 const { crawlData } = require('./crawlData')
 
 const client = new Client();
+const statuses = [{
+    type: 'PLAYING',
+    activity: 'with your feelings'
+}, {
+    type: 'LISTENING',
+    activity: 'the sound of nature'
+}, {
+    type: 'WATCHING',
+    activity: 'myself highing af'
+}];
 
 client.on('ready', () => {
-	client.user.setStatus('Highing af');
-	client.user.setActivity('the sound of nature',{type:'LISTENING'}).catch(console.error);
-	
-	console.log('Ready!')
+    setInterval(() => {
+        const random = Math.floor(Math.random() * statuses.length);
+
+        let { type, activity } = statuses[random]
+
+        client.user.setActivity(activity, { type }).catch(console.error);
+    }, 10000);
+
+
+    console.log('Ready!')
 });
 
 client.on('message', async (msg) => {
