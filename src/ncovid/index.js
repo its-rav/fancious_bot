@@ -105,8 +105,9 @@ exports.getNcovidStatisticsByCountry = (country) => {
                             newDead: 'New deaths',
                             recovered: 'Recovered',
                             acticeCases: 'Active cases',
+                            mildConditionCases:'Mild condition cases',
                             seriousCases: 'Serious/Critical',
-                            totalPerMil: 'Total cases/1M pop',
+                            totalPerMil: 'Total cases/1M pop'
                         };
 
                         const value = fileData[index][key].length !== 0 ? fileData[index][key] : 'none';

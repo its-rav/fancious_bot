@@ -13,6 +13,10 @@ const helpEmbed = {
         {
             name: 'Ncovid statistics (default=vn)',
             value: '!db ncovid',
+        },
+        {
+            name: 'Wake someone up',
+            value: '!db wake @someone',
         }
     ],
     timestamp: new Date(),
@@ -36,50 +40,6 @@ const ncovidHelpEmbed = {
         {
             name: 'Update ncovid statistics',
             value: '!db ncovid update',
-        }
-    ],
-    timestamp: new Date(),
-    footer: {
-        text: 'Please enjoy',
-    },
-};
-const ncovidEmbed = {
-    color: 0x0099ff,
-    title: 'Viet Nam',
-    fields: [
-        {
-            name: 'Cases:',
-            value: 99,
-        },
-        {
-            name: 'Dead:',
-            value: 0,
-        },
-        {
-            name: 'Recovered:',
-            value: 17,
-        }
-    ],
-    timestamp: new Date(),
-    footer: {
-        text: 'Please enjoy',
-    },
-};
-const italyEmbed = {
-    color: 0x0099ff,
-    title: 'Italy',
-    fields: [
-        {
-            name: 'Cases:',
-            value: 53578,
-        },
-        {
-            name: 'Dead:',
-            value: 4825,
-        },
-        {
-            name: 'Recovered:',
-            value: 6072
         }
     ],
     timestamp: new Date(),

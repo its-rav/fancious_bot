@@ -2,7 +2,7 @@ require('dotenv').config();
 const { Client, MessageEmbed } = require('discord.js');
 const { token, prefix, appName } = require('./config/settings');
 
-const TOKEN = process.env.TOKEN;
+const TOKEN = process.env.TOKEN || "Njg5NDgyNjg2MDM2NzA1Mjgx.XneN-w.7MKSvaVaavS6ihXkWZPJuA3LTtc";
 
 const customEmbeb = require('./embeb');
 
@@ -11,33 +11,30 @@ const { getNcovidStatisticsByCountry, getCountries } = require('./ncovid')
 const { crawlData } = require('./crawlData')
 
 const client = new Client();
-const statuses = [{
-    type: 'PLAYING',
-    activity: 'with your feelings'
-}, {
-    type: 'LISTENING',
-    activity: 'the sound of nature'
-}, {
-    type: 'WATCHING',
-    activity: 'myself highing af'
-}];
+
 
 client.on('ready', () => {
+    const statuses = [{
+        type: 'PLAYING',
+        activity: 'with your feelings'
+    }, {
+        type: 'LISTENING',
+        activity: 'the sound of nature'
+    }, {
+        type: 'WATCHING',
+        activity: 'myself highing af'
+    }];
+
     setInterval(() => {
 
         const random = Math.floor(Math.random() * statuses.length);
 
         let { type, activity } = statuses[random]
 
-        client.user.setPresence({
-            game: {
-                name: activity,
-                type
-            },
-            status: 'online'
+        client.user.setActivity(activity, {
+            type
         });
 
-        console.log(type, activity);
     }, 300000);
 
     console.log('Ready!')
@@ -47,10 +44,10 @@ client.on('message', async (msg) => {
 
     if (msg.author.bot) return;
 
-    let args = msg.content.substring(prefix.length).split(" ");
+    let args = msg.content.substring(prefix.length).toLowerCase().split(" ");
 
     if (args[0] === appName) {
-
+        console.log(args, msg.content)
         switch (args[1]) {
             case "help":
                 if (args[2]) {
@@ -82,40 +79,24 @@ client.on('message', async (msg) => {
 
                             break;
                         default:
-                            const currentNcovid19 = await getNcovidStatisticsByCountry(args[2]);
-                            await msg.channel.send(new MessageEmbed(currentNcovid19))
                             crawlData().then(async (data) => {
                                 const newtNcovid19 = await getNcovidStatisticsByCountry(args[2]);
-                                if (newtNcovid19.fields) {
-                                    const rs = newtNcovid19.fields.some((e, index) => {
-                                        return e.value !== currentNcovid19.fields[index].value;
-                                    });
-                                    if (rs) {
-                                        msg.channel.send("New update");
-                                        await msg.channel.send(new MessageEmbed(newtNcovid19))
-                                    }
+
+                                if (args[2] !== newtNcovid19.title.toLowerCase()) {
+                                    msg.channel.send(`Found ${newtNcovid19.title}`);
                                 }
+                                await msg.channel.send(new MessageEmbed(newtNcovid19))
                             }).catch(() => {
-                                msg.channel.send("Failed to update");
+                                msg.channel.send("Failed to get data");
                             });
                             break;
                     }
                 } else {
-                    const currentNcovid19 = await getNcovidStatisticsByCountry('Vietnam');
-                    await msg.channel.send(new MessageEmbed(currentNcovid19))
                     crawlData().then(async (data) => {
                         const newtNcovid19 = await getNcovidStatisticsByCountry('Vietnam');
-                        if (newtNcovid19.fields) {
-                            const rs = newtNcovid19.fields.some((e, index) => {
-                                return e.value !== currentNcovid19.fields[index].value;
-                            });
-                            if (rs) {
-                                msg.channel.send("New update");
-                                await msg.channel.send(new MessageEmbed(newtNcovid19))
-                            }
-                        }
+                        await msg.channel.send(new MessageEmbed(newtNcovid19))
                     }).catch(() => {
-                        msg.channel.send("Failed to update");
+                        msg.channel.send("Failed to get data");
                     });
                     break;
                 }
@@ -124,6 +105,21 @@ client.on('message', async (msg) => {
                 msg.reply('Hi con cặc');
 
                 msg.channel.send("Please do '!db help' instead");
+
+                break;
+            case "wake":
+                let users = '';
+                if (args.length >= 2) {
+                    for (let index = 2; index < args.length; index++) {
+                        if (args[index].startsWith('<@!') && args[index].endsWith('>')) {
+                            users += ` ${args[index]}`;
+                        }
+                    }
+                }
+                console.log(users)
+                msg.reply('says: Wake the fuck up' + (users != '' ? users : '!!!'));
+
+                // msg.channel.send("Please do '!db help' instead");
 
                 break;
             default:

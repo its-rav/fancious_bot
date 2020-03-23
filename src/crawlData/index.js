@@ -13,10 +13,40 @@ const pages = [
         url: "https://www.worldometers.info/coronavirus/",
         fileName: 'worldometers.html',
         extractData: (html) => {
-            const $ = cheerio.load(html);
-            const table = $('#main_table_countries_today tbody')[0];
-
             let all = null;
+            const $ = cheerio.load(html);
+
+            const worldwide1 = $('.maincounter-number')
+            const worldwide2 = $('.number-table-main')
+            const worldwide3 = $('.number-table')
+            const allCases = $(worldwide1[0]).text().trim();
+            const deathCases = $(worldwide1[1]).text().trim();
+            const recoveredCases = $(worldwide2[1]).text().trim();
+            const activeCase = $(worldwide2[0]).text().trim();
+            const mildConditionCases = $(worldwide3[0]).text().trim();
+            const seriousCases = $(worldwide3[1]).text().trim();
+            console.log($(worldwide3[0]).text().trim(),
+            $(worldwide3[1]).text().trim(),
+            $(worldwide3[2]).text().trim(),
+            $(worldwide3[3]).text().trim())
+            if (all == null)
+                all = [];
+            all.push({
+                country: 'Worldwide',
+                // code: countryCode[$(row[0]).text().trim()],
+                cases: allCases,
+                newCases: '',
+                dead: deathCases,
+                newDead: '',
+                recovered: recoveredCases,
+                acticeCases: activeCase,
+                seriousCases,
+                mildConditionCases
+            });
+            
+            console.log(all)
+            //countries
+            const table = $('#main_table_countries_today tbody')[0];
 
             $($(table).children()).each((index, tr) => {
                 if (all == null)
