@@ -113,8 +113,12 @@ client.on('message', async (msg) => {
                     for (let index = 2; index < args.length; index++) {
                         if (args[index].startsWith('<@!') && args[index].endsWith('>')) {
                             users += ` ${args[index]}`;
+                            // msg.users.get(args[index]).send('Please wake up! We are waiting for you')
                         }
                     }
+
+                    const mentionUsers = msg.mentions.users;
+                    mentionUsers.forEach((u) => u.send('WAKE UP YOU MF!!!!'));
                 }
                 console.log(users)
                 msg.reply('says: Wake the fuck up' + (users != '' ? users : '!!!'));
